@@ -5,6 +5,7 @@ import javax.persistence.*;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name="Student")
+@Table(name="student", uniqueConstraints = {@UniqueConstraint(name = "student_email_unique", columnNames = "email")})
 public class Student {
     @Id
     @SequenceGenerator(
@@ -24,7 +25,7 @@ public class Student {
     private String lastName;
     @Column(name = "email", nullable = false, columnDefinition = "TEXT", unique = true)
     private String email;
-    @Column(name = "age")
+    @Column(name = "age", nullable = false)
     private Integer age;
 
     public Student(Long id, String firstName,
@@ -34,6 +35,9 @@ public class Student {
         this.lastName = lastName;
         this.email = email;
         this.age = age;
+    }
+
+    public Student() {
     }
 
     public Long getId() {
